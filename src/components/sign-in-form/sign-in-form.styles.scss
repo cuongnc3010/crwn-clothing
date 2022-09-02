@@ -1,4 +1,4 @@
-.sign-up-container {
+.sign-in-container {
   display: flex;
   flex-direction: column;
   width: 380px;
@@ -9,4 +9,8 @@ h2 {
 .buttons-container {
   display: flex;
   justify-content: space-between;
+}
+
+.icon-container {
+  margin: 0 5px;
 }

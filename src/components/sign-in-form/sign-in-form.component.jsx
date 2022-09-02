@@ -4,6 +4,7 @@ import {
   signInAuthUserWithEmailAndPassword,
   signInWithGooglePopup,
 } from '../../utils/firebase/firebase.utils';
+import { BsGoogle } from 'react-icons/bs';
 import Button from '../button/button.component';
 import FormInput from '../form-input/form-input.component';
 import './sign-in-form.styles.scss';
@@ -21,6 +22,11 @@ const SignInForm = () => {
     setFormFields(defaultFormFields);
   };
 
+  const signInWithGoogle = async () => {
+    const { user } = await signInWithGooglePopup();
+    await createUserDocumentFromAuth(user);
+  };
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormFields({ ...formFields, [name]: value });
@@ -33,17 +39,23 @@ const SignInForm = () => {
       const resp = await signInAuthUserWithEmailAndPassword(email, password);
       console.log(resp);
       resetFormFields();
-    } catch (error) {}
-  };
-
-  const signInWithGoogle = async () => {
-    const { user } = await signInWithGooglePopup();
-    await createUserDocumentFromAuth(user);
+    } catch (error) {
+      switch (error.code) {
+        case 'auth/wrong-password':
+          alert('Incorrect password for this account');
+          break;
+        case 'auth/user-not-found':
+          alert('No user associated with this email');
+          break;
+        default:
+          console.log(`Loging in encoutered an error: ${error.message}`);
+      }
+    }
   };
 
   return (
     <>
-      <div className='sign-up-container'>
+      <div className='sign-in-container'>
         <h2>Already have an account ?</h2>
         <span>Sign In With Your Email And Password</span>
         <form onSubmit={handleSubmit}>
@@ -70,8 +82,15 @@ const SignInForm = () => {
           />
           <div className='buttons-container'>
             <Button type='submit'>Sign In</Button>
-            <Button buttonType='google' onClick={signInWithGoogle}>
-              Google Sign In
+            <Button
+              type='button'
+              buttonType='google'
+              onClick={signInWithGoogle}
+            >
+              Google Sign-In
+              <span className='icon-container'>
+                <BsGoogle />
+              </span>
             </Button>
           </div>
         </form>
