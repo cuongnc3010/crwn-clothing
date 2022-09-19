@@ -23,6 +23,7 @@ export const BaseSpan = styled.span`
   &:nth-child(2) {
     width: 28%;
   }
+  margin-left: 1px;
 `;
 
 export const Quantity = styled(BaseSpan)`
