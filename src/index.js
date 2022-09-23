@@ -1,44 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
-
-import { UserProvider } from './contexts/user.context';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import App from './App';
-
 import { CartProvider } from './contexts/cart.context';
-<<<<<<< Updated upstream
 import './index.scss';
 import reportWebVitals from './reportWebVitals';
-=======
 import { store } from './store/store';
->>>>>>> Stashed changes
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-<<<<<<< Updated upstream
-    <Router>
-      <UserProvider>
+    <Provider store={store}>
+      <Router>
         <CartProvider>
           <App />
         </CartProvider>
-      </UserProvider>
-    </Router>
-=======
-    <Provider store={store}>
-      <Router>
-        <UserProvider>
-          <CategoriesProvider>
-            <CartProvider>
-              <App />
-            </CartProvider>
-          </CategoriesProvider>
-        </UserProvider>
       </Router>
     </Provider>
->>>>>>> Stashed changes
   </React.StrictMode>
 );
 
