@@ -25,6 +25,7 @@ const App = () => {
       dispatch(setCurrentUser(user));
     });
     return unSubcribe;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <Routes>

@@ -13,7 +13,7 @@ const Category = () => {
   const [products, setProducts] = useState(categoriesMap[category]);
   console.log('render/re-rendering category component');
   useEffect(() => {
-    console.log('effect fired calling ssetProducts');
+    console.log('effect fired calling setProducts');
     setProducts(categoriesMap[category]);
   }, [category, categoriesMap]);
   return (

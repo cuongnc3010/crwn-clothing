@@ -15,6 +15,7 @@ const Shop = () => {
       dispatch(setCategories(categoriesArray));
     };
     getCategoriesMap();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <Routes>
